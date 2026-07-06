@@ -9,6 +9,7 @@
     <h2>Connexion</h2>
 
     <form method="POST" action="{{ '/login' }}">
+        @csrf
         <label for="email">Adresse e-mail :</label><br>
         <input type="email" id="email" name="email" required><br><br>
         <label for="password">Mot de passe:</label><br>
@@ -16,8 +17,11 @@
         <button type="submit">Se connecter</button>
     </form>
     <p>
-        Vous n'avez pas de compte ?
-        <a> href="{{ route('register') }}">S'inscrire</a>
+    Vous n'avez pas de compte ?
+    <br>
+     <button type="button" onclick="window.location.href='{{ route ('register') }}'">
+        S'inscrire
+    </button>
     </p>
 </body>
 </html>

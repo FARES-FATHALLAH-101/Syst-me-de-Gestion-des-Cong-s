@@ -9,6 +9,7 @@
     <h2>Créer un compte</h2>
     
     <form method="POST" action="{{ '/register' }}">
+        @csrf
         <label for="name">Nom :</label><br>
         <input type="text" id="name" name="name" required><br><br>
         <label for="prenom">Prenom :</label><br>

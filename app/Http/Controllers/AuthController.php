@@ -34,7 +34,7 @@ class AuthController extends Controller
     }
     public function showLogin()
     {
-        return view('welcome');
+        return view('login');
     }
     public function login(Request $request)
     {
@@ -54,4 +54,19 @@ class AuthController extends Controller
         'email' => 'Email ou mot de passe incorrect.',
         ]);
     } 
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->routr('home');
+    }
+    public function employeeDashboard()
+    {
+        return view('employeedashboard');
+    }
+    public function adminDashboard()
+    {
+        return view ('adminDashboard');
+    }
 }
