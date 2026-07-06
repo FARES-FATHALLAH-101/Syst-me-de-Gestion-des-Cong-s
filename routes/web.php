@@ -26,5 +26,7 @@ Route::post('/leave/update/{id}',[LeaveRequestController::class, 'update'])->nam
 Route::get('/leave/cancel/{id}',[LeaveRequestController::class,'cancel'])->name('leave.cancel');
 
 Route::GET('/leave/search',[LeaveRequestController::class,'search'])->name('leave.search');
+Route::POST('/leave/search',[LeaveRequestController::class,'searchResult'])->name('leave.search.resut');
+
 Route::GET('/logout',[AuthController::class,'logout'])->name('logout');
 

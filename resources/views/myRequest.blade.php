@@ -38,8 +38,6 @@
         <button> onclick="window.location.href='{{ route('employee.dashboard') }}'"
             Retour
         </button>
-
-
     </table>
 </body>
 </html>

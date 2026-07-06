@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\UserModel;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -25,7 +25,7 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users,email',
             'password' => 'required|confirmed|min:8',
         ]);
-        $user=UserModel::create([
+        $user=User::create([
             'name' => $request->name,
             'prenom' => $request->prenom,
             'email' => $request->email,
