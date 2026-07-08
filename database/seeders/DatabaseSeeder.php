@@ -24,4 +24,8 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
     }
+    public function ru(): void
+   {
+    $this->call(UserSeeder::class);
+   }
 }

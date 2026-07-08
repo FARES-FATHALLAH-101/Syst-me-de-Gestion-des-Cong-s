@@ -27,13 +27,20 @@ class LeaveRequestController extends Controller
             'end_date'=> $request->end_date,
             'reason'=> $request->reason,
         ]);
-        return redirect()->route('employe.dashboard')->with('succes','Votre demande de congé a été envoyée avec succès.');
+        return redirect()->route('employedashboard')->with('succes','Votre demande de congé a été envoyée avec succès.');
 
     }
-
-    public function index()
+    public function index(Request $request)
     {
-        return view('listLeaveRequest');
+        $query = LeaveRequest::query();
+        if ($request->leave_type) {
+            $query->where('leave_type',$request->leave_type);
+        }
+        if ($request->status){
+            $query->where('status', $request->status);
+        }
+        $leaveRequests = $query->get();
+        return view('listLeaveRequest', compact('leaveRequests'));
     }
     public function edit($id)
     {
@@ -64,7 +71,7 @@ class LeaveRequestController extends Controller
         $leaveRequest->save();
         return redirect()->route ('leave.list');
     }
-    public function cancek($id)
+    public function cancel($id)
     {
         $leaveRequest = LeaveRequest::findOrFail($id);
         if($leaveRequest->statut !='En attente') {
@@ -73,22 +80,10 @@ class LeaveRequestController extends Controller
         $leaveRequest->delete();
         return redirect()->route('leave.list')->with('success','la demande a été annulée avec succès.');
     }
-
     public function refresh()
     {
         $leaveRequests = LeaveRequest::where('user_id', Auth::id())->get();
         return view('myRequests',['leaveRequests'=>$leaveRequests]);
     }
-    public function search()
-    {
-        return view('searchleaveRequest');
-    }
-    public function searchResult(Request $request)
-    {
-        $search = $request->search;
-        $leaveRequests= LeaveRequest::where('leave_type', 'like', "%$search%")->orWHERE('status','like',"%$search")
-        ->orWHERE('start_date','like',"%$search%")
-        ->orWHERE('end_date','like',"%$search%")->get();
-        return view('searchLeaveRequest',compact('leaveRequests'));
-    }
+
 }

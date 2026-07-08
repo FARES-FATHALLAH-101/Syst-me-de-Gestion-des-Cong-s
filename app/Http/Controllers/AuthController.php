@@ -21,15 +21,15 @@ class AuthController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'prenom' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|confirmed|min:8',
         ]);
         $user=User::create([
             'name' => $request->name,
-            'prenom' => $request->prenom,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => 'employee',
+
         ]);
     }
     public function showLogin()
@@ -48,12 +48,17 @@ class AuthController extends Controller
             if (Auth::user()->role == 'admin') {
                 return redirect()->route('admin.dashboard');
             }
-            return redirect()->route('employee.dashboard');
+            return redirect()->route('employeedashboard');
         }
         return back()->withErrors([
         'email' => 'Email ou mot de passe incorrect.',
         ]);
-    } 
+    }
+
+    public function employeeDashboard()
+    {
+        return view('employeedashboard');
+    }
     public function logout(Request $request)
     {
         Auth::logout();
@@ -61,10 +66,7 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
         return redirect()->routr('home');
     }
-    public function employeeDashboard()
-    {
-        return view('employeedashboard');
-    }
+
     public function adminDashboard()
     {
         return view ('adminDashboard');

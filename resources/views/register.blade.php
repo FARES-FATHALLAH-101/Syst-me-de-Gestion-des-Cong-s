@@ -12,8 +12,6 @@
         @csrf
         <label for="name">Nom :</label><br>
         <input type="text" id="name" name="name" required><br><br>
-        <label for="prenom">Prenom :</label><br>
-        <input type="text" id="prenom" name="prenom" required><br><br>
         <label for="email">Email :</label><br>
         <input type="email" id="email" name="email" required><br><br>
         <label for="password">Mot de passe :</label><br>

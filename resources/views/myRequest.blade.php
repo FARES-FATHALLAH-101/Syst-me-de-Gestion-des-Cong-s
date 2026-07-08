@@ -35,7 +35,7 @@
         <button> onclick="location.reload()">
             Actualiser
         </button>
-        <button> onclick="window.location.href='{{ route('employee.dashboard') }}'"
+        <button> onclick="window.location.href='{{ route('employeedashboard') }}'"
             Retour
         </button>
     </table>
